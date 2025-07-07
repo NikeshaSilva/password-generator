@@ -10,14 +10,58 @@ export default function App() {
   const [isPwGenerated, setIsPwGenerated] = useState<boolean>(false);
   const [lowercase, setLowercase] = useState<boolean>(true);
   const [uppercase, setUppercase] = useState<boolean>(false);
-  const [numbers, useNumbers] = useState<boolean>(false);
-  const [symbols, useSymbols] = useState<boolean>(false);
+  const [numbers, setNumbers] = useState<boolean>(false);
+  const [symbols, setSymbols] = useState<boolean>(false);
 
-  const generatePasswordString = (passwordLength: number) => {};
+  const generatePasswordString = (passwordLength: number) => {
+    let characterList = '';
+    const upperCaseChars: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const lowerCaseChars: string = 'abcdefghijklmnopqrstuvwxyz';
+    const digitChars: string = '0123456789';
+    const specialChars: string = '!@#$%^&*()_+';
 
-  const createPassword = (characters: string, passwordLength: number) => {};
+    if (uppercase) {
+      characterList += uppercase;
+    }
 
-  const resetPasswordState = () => {};
+    if (lowercase) {
+      characterList += lowercase;
+    }
+
+    if (numbers) {
+      characterList += numbers;
+    }
+
+    if (symbols) {
+      characterList += symbols;
+    }
+
+    const passwordResult = createPassword(characterList, passwordLength);
+
+    setPassword(passwordResult);
+    setIsPwGenerated(!isPwGenerated);
+  };
+
+  const createPassword = (
+    characters: string,
+    passwordLength: number,
+  ): string => {
+    let result = '';
+    for (let i = 0; i < passwordLength; i++) {
+      const characterIndex = Math.round(Math.random() * characters.length);
+      result += characters.charAt(characterIndex);
+    }
+    return result;
+  };
+
+  const resetPasswordState = () => {
+    setPassword('');
+    setIsPwGenerated(false);
+    setLowercase(true);
+    setUppercase(false);
+    setNumbers(false);
+    setSymbols(false);
+  };
 
   const PasswordSchema = yup.object().shape({
     passwordLength: yup
