@@ -32,19 +32,19 @@ export default function App() {
     const specialChars: string = '!@#$%^&*()_+';
 
     if (uppercase) {
-      characterList += uppercase;
+      characterList += upperCaseChars;
     }
 
     if (lowercase) {
-      characterList += lowercase;
+      characterList += lowerCaseChars;
     }
 
     if (numbers) {
-      characterList += numbers;
+      characterList += digitChars;
     }
 
     if (symbols) {
-      characterList += symbols;
+      characterList += specialChars;
     }
 
     const passwordResult = createPassword(characterList, passwordLength);
@@ -181,6 +181,15 @@ export default function App() {
             )}
           </Formik>
         </View>
+        {isPwGenerated ? (
+          <View style={[styles.card, styles.cardElevated]}>
+            <Text style={styles.subTitle}>Result: </Text>
+            <Text style={styles.description}>Long Press to Copy: </Text>
+            <Text selectable={true} style={styles.generatedPassword}>
+              {password}
+            </Text>
+          </View>
+        ) : null}
       </SafeAreaView>
     </ScrollView>
   );
