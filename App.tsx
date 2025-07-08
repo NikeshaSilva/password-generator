@@ -92,7 +92,7 @@ export default function App() {
             validationSchema={PasswordSchema}
             onSubmit={values => {
               console.log('values', values);
-              generatePasswordString(+values.passwordLength); //TODO
+              generatePasswordString(+values.passwordLength);
             }}
           >
             {({
@@ -126,7 +126,7 @@ export default function App() {
 
                 {/* Include LowerCase */}
                 <View style={styles.inputWrapper}>
-                  <Text style={styles.heading}>Include lowercase</Text>
+                  <Text style={styles.heading}>Include Lowercase</Text>
                   <BouncyCheckbox
                     isChecked={lowercase}
                     onPress={() => setLowercase(!lowercase)}
